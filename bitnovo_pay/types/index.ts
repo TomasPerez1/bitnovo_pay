@@ -1,8 +1,10 @@
 export interface Currency {
-  id: string;
+  symbol: string;
   name: string;
   minAmount: number;
   maxAmount: number;
+  blockchain: string;
+  image: string;
 }
 
 export interface PaymentOrder {

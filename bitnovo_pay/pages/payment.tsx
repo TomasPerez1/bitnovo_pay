@@ -1,0 +1,52 @@
+import { PaymentInfo } from '../types';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import PaymentSummary from '../components/PaymentSummary';
+import api from '../services/api';
+
+const PaymentPage = () => {
+  const router = useRouter();
+  const { identifier } = router.query;
+  const [paymentInfo, setPaymentInfo] = useState<PaymentInfo | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchPaymentInfo = async () => {
+      try {
+        const response = await api.get(`/orders/info/${identifier}`);
+        setPaymentInfo(response.data);
+      } catch (err) {
+        setError('Error al obtener la información del pago');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (identifier) {
+      fetchPaymentInfo();
+    }
+  }, [identifier]);
+
+  const handleStatusChange = (status: string) => {
+    if (status === 'CO' || status === 'AC') {
+      router.push('/success');
+    } else if (status === 'EX' || status === 'OC') {
+      router.push('/error');
+    }
+  };
+
+  if (loading) return <p className="text-center">Cargando información del pago...</p>;
+  if (error) return <p className="text-center text-red-600">{error}</p>;
+  if (!paymentInfo) return <p className="text-center">No se encontró información del pago.</p>;
+
+  return (
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
+        <PaymentSummary paymentInfo={paymentInfo} onStatusChange={handleStatusChange} />
+      </div>
+    </div>
+  );
+};
+
+export default PaymentPage;
