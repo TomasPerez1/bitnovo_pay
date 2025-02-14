@@ -113,14 +113,12 @@ const CreatePayment = ({ onSubmit }: PaymentFormProps) => {
           </div>
         </div>
 
-        {/* Mensaje de error */}
         {error && (
           <p className="text-sm text-red-600">
             {error}
           </p>
         )}
 
-        {/* Botón de enviar */}
         <div>
           <button
             type="submit"
