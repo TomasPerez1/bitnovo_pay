@@ -54,7 +54,7 @@ const CreatePayment = ({ onSubmit, currencies }: PaymentFormProps) => {
     <>
       <form onSubmit={handleSubmit} className="">
         <div className='mb-2'>
-          <label htmlFor="amount" className="block text-sm font-medium">
+          <label htmlFor="amount" className="block text-sm font-semibold">
             Importe a pagar
           </label>
           <div className="mt-1">
@@ -63,7 +63,7 @@ const CreatePayment = ({ onSubmit, currencies }: PaymentFormProps) => {
               type="text"
               value={amount}
               onChange={handleAmountChange}
-              className="w-full text-primary px-2 py-3.5 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-700"
+              className="w-full text-primary  px-2 py-3.5 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-700"
               placeholder="Añade importe a pagar"
             />
             <p className={`text-sm ml-2  ${error !== "default" ? "visible text-red-600" : "invisible"}`}>
@@ -73,7 +73,7 @@ const CreatePayment = ({ onSubmit, currencies }: PaymentFormProps) => {
         </div>
     
         <div className='mb-6'>
-          <label htmlFor="currency" className="text-sm font-medium flex gap-1 items-center">
+          <label htmlFor="currency" className="text-sm font-semibold flex gap-1 items-center">
             Seleccionar moneda <RiInformationLine className='w-4 text-gray-600'/>
           </label>
           <div onClick={() => setError("default")} className="mt-1">
@@ -86,7 +86,7 @@ const CreatePayment = ({ onSubmit, currencies }: PaymentFormProps) => {
         </div>
 
         <div className='mb-6'>
-          <label htmlFor="concept" className="block text-sm font-medium ">
+          <label htmlFor="concept" className="block text-sm font-semibold ">
             Concepto
           </label>
           <div className="mt-1">

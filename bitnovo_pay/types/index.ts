@@ -15,9 +15,10 @@ export interface PaymentOrder {
 
 export interface PaymentInfo {
   id: string;
-  amount: number;
-  concept: string;
-  currency: string;
+  fiat_amount: number;
+  currency_id: string;
+  created_at: string;
+  notes: string;
   status: string;
   address: string;
   qrCode: string;

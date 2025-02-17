@@ -10,7 +10,7 @@ const usePaymentInfo = (identifier: string) => {
     const fetchPaymentInfo = async () => {
       try {
         const response = await api.get(`/orders/info/${identifier}`);
-        setPaymentInfo(response.data);
+        setPaymentInfo(response.data[0]);
       } catch (err) {
         setError("Error al obtener la información del pago");
       } finally {

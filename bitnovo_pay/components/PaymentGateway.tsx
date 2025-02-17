@@ -47,6 +47,24 @@ const PaymentGateway = ({ paymentInfo, onStatusChange }: PaymentSummaryProps) =>
           {status === 'OC' && 'Cancelado'}
         </p>
       </div>
+       {/* Realiza el pago */}
+          {/* Cantidad a enviar */}
+          {/* <div>
+            <p className="text-sm text-gray-600">Enviar:</p>
+            <p className="text-lg font-semibold">108.02 {paymentInfo.currency}</p>
+          </div> */}
+
+          {/* Dirección de pago */}
+          {/* <div>
+            <p className="text-sm text-gray-600">Dirección de pago:</p>
+            <p className="text-lg font-semibold break-all">{paymentInfo.address}</p>
+          </div> */}
+
+          {/* Etiqueta de destino */}
+          {/* <div>
+            <p className="text-sm text-gray-600">Etiqueta de destino:</p>
+            <p className="text-lg font-semibold">2557164061</p>
+          </div> */}
     </div>
   )
 }

@@ -1,72 +1,76 @@
 import { useEffect } from 'react';
 import useWebSocket from '../hooks/useWebSocket';
-import { PaymentInfo } from '../types';
+import { Currency, PaymentInfo } from '../types';
+import Image from 'next/image';
+import { RiVerifiedBadgeFill } from '@remixicon/react';
 
 interface PaymentSummaryProps {
   paymentInfo: PaymentInfo;
+  currencies: Currency[];
   onStatusChange: (status: string) => void;
 }
 
-const PaymentSummary = ({ paymentInfo, onStatusChange }: PaymentSummaryProps) => {
+const PaymentSummary = ({ paymentInfo, currencies, onStatusChange }: PaymentSummaryProps) => {
   const status = useWebSocket(paymentInfo.id);
+  const selectedCrypto = currencies.find(crypto => crypto.symbol === paymentInfo.currency_id)
 
   useEffect(() => {
     onStatusChange(status);
   }, [status, onStatusChange]);
 
   return (
-    <div className="space-y-8">
-      {/* Resumen del pedido */}
-      <div className="bg-gray-50 p-6 rounded-lg">
-        <h2 className="text-xl font-bold mb-4">Resumen del pedido</h2>
+    <div className="space-y-8 w-full border border-green-500">
+      <div className="p-6 text-primary font-semibold">
+        <h2 className="text-xl text-primary font-semibold mb-4">Resumen del pedido</h2>
 
-        <div className="space-y-3">
-          <div>
-            <p className="text-sm text-gray-600">Importe:</p>
-            <p className="text-lg font-semibold">{paymentInfo.amount} EUR</p>
+        <div className="p-2 rounded-xl shadow-lg bg-gray-100">
+          <div className='flex justify-between p-3 border-b-1 border-gray-400'>
+            <p className="text-lg ">Importe:</p>
+            <p className="text-lg font-semibold">{paymentInfo.fiat_amount.toFixed(2)} EUR</p>
           </div>
 
-          <div>
-            <p className="text-sm text-gray-600">Moneda seleccionada:</p>
-            <p className="text-lg font-semibold">{paymentInfo.currency}</p>
+          <div className='flex justify-between p-3 border-b-1 border-gray-400 items-center'>
+            <p className="text-lg ">Moneda seleccionada:</p>
+            <span className='flex items-center border border-black p-0'>
+              <Image 
+              className="p-2 rounded-xl" 
+              width={50} 
+              height={50} 
+              alt={selectedCrypto?.name || "crypto_img"} 
+              src={selectedCrypto?.image || ""}/>
+              <p className="text-lg font-semibold">{paymentInfo.currency_id.replaceAll("_", " ")}</p>
+            </span>
           </div>
 
-          <div>
-            <p className="text-sm text-gray-600">Comercio:</p>
-            <p className="text-lg font-semibold">Comercio de pruebas de Semega</p>
+          <div className='flex justify-between p-3'>
+            <p className="text-lg ">Comercio:</p>
+            <span className='flex  items-center gap-1.5'>
+              <RiVerifiedBadgeFill className='w-5 text-blue-300'/> 
+              <p className="text-lg font-medium">Comercio de pruebas de Semega</p>
+            </span>
           </div>
 
-          <div>
-            <p className="text-sm text-gray-600">Fecha:</p>
-            <p className="text-lg font-semibold">21/01/2022 08:52</p>
+          <div className='flex justify-between p-3 border-b-1 border-gray-400'>
+            <p className="text-lg ">Fecha:</p>
+            <p className="text-lg font-medium">
+              {new Date(paymentInfo.created_at).toLocaleString('es-AR', { 
+                timeZone: 'America/Argentina/Buenos_Aires', 
+                hour: 'numeric', 
+                minute: 'numeric', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+              }).replace(",", " ")}
+            </p>
           </div>
 
-          <div>
-            <p className="text-sm text-gray-600">Concepto:</p>
-            <p className="text-lg font-semibold">{paymentInfo.concept}</p>
+          <div className='flex justify-between p-3 '>
+            <p className="text-lg ">Concepto:</p>
+            <p className="text-lg font-medium">{paymentInfo.notes}</p>
           </div>
         </div>
       </div>
-
-      {/* Realiza el pago */}
-          {/* Cantidad a enviar */}
-          <div>
-            <p className="text-sm text-gray-600">Enviar:</p>
-            <p className="text-lg font-semibold">108.02 {paymentInfo.currency}</p>
-          </div>
-
-          {/* Dirección de pago */}
-          <div>
-            <p className="text-sm text-gray-600">Dirección de pago:</p>
-            <p className="text-lg font-semibold break-all">{paymentInfo.address}</p>
-          </div>
-
-          {/* Etiqueta de destino */}
-          <div>
-            <p className="text-sm text-gray-600">Etiqueta de destino:</p>
-            <p className="text-lg font-semibold">2557164061</p>
-          </div>
-        </div>
+    </div>
   );
 };
 
