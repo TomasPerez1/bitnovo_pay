@@ -10,12 +10,12 @@
   },
   "dependencies": {
     "@heroui/react": "^2.6.14",
+    "@remixicon/react": "^4.6.0",
     "axios": "^1.7.9",
     "framer-motion": "^12.4.3",
     "next": "15.1.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "remixicon": "^4.6.0",
     "web3": "^4.16.0",
     "websocket": "^1.0.35"
   },

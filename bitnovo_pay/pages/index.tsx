@@ -9,7 +9,7 @@ const Home = () => {
     // Aquí manejaremos la creación del pago
   };
 
-  if (loading) return <p className="text-center">Cargando criptodivisas...</p>;
+  if (loading) return <p className="text-center bg-green-600">Cargando criptodivisas...</p>;
   if (error) return <p className="text-center text-red-600">{error}</p>;
 
   return (
