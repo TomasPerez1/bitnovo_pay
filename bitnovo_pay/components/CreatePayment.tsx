@@ -1,16 +1,12 @@
-import {  useEffect, useState } from 'react';
-import { Currency, PaymentOrder } from '../types';
+import {  useState } from 'react';
+import { useRouter } from 'next/router';
+import { Currency } from '../types';
 import { RiInformationLine } from '@remixicon/react';
 import CurrencySelector from './CurrencySelector';
 import useCreatePayment from '@/hooks/useCreatePayment';
-import { useRouter } from 'next/router';
 
-interface PaymentFormProps {
-  currencies: Currency[];
-  onSubmit: (order: PaymentOrder) => void;
-}
 
-const CreatePayment = ({ onSubmit, currencies }: PaymentFormProps) => {
+const CreatePayment = ({ currencies }: {currencies: Currency[]}) => {
   const router = useRouter();
   const { createPayment, loading, /* error,  */data } = useCreatePayment();
   const [selectedCrypto, setSelectedCrypto] = useState<Currency>(currencies[0]);

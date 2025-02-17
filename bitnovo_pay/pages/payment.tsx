@@ -20,7 +20,7 @@ const PaymentPage = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <div className="w-[90%] gap-2 grid grid-cols-2  p-8 rounded-lg ">
-        <PaymentSummary paymentInfo={paymentInfo} currencies={currencies} onStatusChange={() => {} } />
+        <PaymentSummary paymentInfo={paymentInfo} currencies={currencies}  />
         <PaymentGateway paymentInfo={paymentInfo} onStatusChange={() => {} } />
       </div>
     </div>

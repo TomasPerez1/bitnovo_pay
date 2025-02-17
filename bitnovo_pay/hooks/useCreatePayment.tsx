@@ -2,9 +2,9 @@ import { useState } from "react";
 import api from "@/services/api";
 
 const useCreatePayment = () => {
-  const [loading, setLoading] = useState(false); // Estado para manejar la carga
-  const [error, setError] = useState<string | null>(null); // Estado para manejar errores
-  const [data, setData] = useState<any>(null); // Estado para almacenar la respuesta de la API
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null); 
+  const [data, setData] = useState<any>(null); 
 
 
   const createPayment = async ({amount, concept, currency}: {amount: string, concept: string, currency: string/* , frontDni: File, backDni: File */}) => {

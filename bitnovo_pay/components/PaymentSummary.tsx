@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-import useWebSocket from '../hooks/useWebSocket';
 import { Currency, PaymentInfo } from '../types';
 import Image from 'next/image';
 import { RiVerifiedBadgeFill } from '@remixicon/react';
@@ -7,16 +5,11 @@ import { RiVerifiedBadgeFill } from '@remixicon/react';
 interface PaymentSummaryProps {
   paymentInfo: PaymentInfo;
   currencies: Currency[];
-  onStatusChange: (status: string) => void;
 }
 
-const PaymentSummary = ({ paymentInfo, currencies, onStatusChange }: PaymentSummaryProps) => {
-  const status = useWebSocket(paymentInfo.id);
+const PaymentSummary = ({ paymentInfo, currencies }: PaymentSummaryProps) => {
   const selectedCrypto = currencies.find(crypto => crypto.symbol === paymentInfo.currency_id)
 
-  useEffect(() => {
-    onStatusChange(status);
-  }, [status, onStatusChange]);
 
   return (
     <div className="space-y-8 w-full border border-green-500">

@@ -13,8 +13,8 @@ interface PaymentSummaryProps {
 
 
 const PaymentGateway = ({ paymentInfo, onStatusChange }: PaymentSummaryProps) => {
-  console.log(paymentInfo)
-  const status = useWebSocket(paymentInfo.identifier);
+  console.log("paymentInfoooo", paymentInfo)
+  const status = useWebSocket({identifier: paymentInfo.identifier});
   const [paymentMethod, setPaymentMethod] = useState<"QR" | "META">("QR")
 
   useEffect(() => {
@@ -63,8 +63,6 @@ const PaymentGateway = ({ paymentInfo, onStatusChange }: PaymentSummaryProps) =>
             <p className='border border-black'><RiFileCopyLine className='w-5 text-blue-600 mr-auto'/></p>
           </div>
           
-
-          {/* Etiqueta de destino */}
           <div className='flex items-center gap-1.5'>
             <RiInformationFill className='w-5 text-yellow-400/50'/>
             <p className="text-sm text-gray-600">Etiqueta de destino:</p>
@@ -76,15 +74,3 @@ const PaymentGateway = ({ paymentInfo, onStatusChange }: PaymentSummaryProps) =>
 }
 
 export default PaymentGateway
-
-
-  {/* <div className="text-center">
-            <p className="text-sm text-gray-600">Estado:</p>
-            <p className="text-lg font-semibold">
-              {status === 'pending' && 'Pendiente'}
-              {status === 'AC' && 'Aceptado'}
-              {status === 'CO' && 'Completado'}
-              {status === 'EX' && 'Expirado'}
-              {status === 'OC' && 'Cancelado'}
-            </p>
-          </div> */}

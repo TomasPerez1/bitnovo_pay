@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useWebSocket = (identifier: string) => {
+const useWebSocket = ({identifier}: {identifier: string}) => {
   const [status, setStatus] = useState<string>('pending');
 
 

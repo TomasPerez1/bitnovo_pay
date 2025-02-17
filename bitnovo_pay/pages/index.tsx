@@ -3,9 +3,7 @@ import useCurrencies from '@/hooks/useCurrencies';
 
 const Home = () => {
   const { currencies, loading, error } = useCurrencies();
-  console.log(currencies)
   const handleSubmit = (order: any) => {
-    console.log('Pago creado:', order);
   };
 
   if (loading) return <p className="text-center bg-green-600">Cargando criptodivisas...</p>;
@@ -15,7 +13,7 @@ const Home = () => {
     <div className="min-h-screen  bg-gray-100 flex items-center justify-center p-4">
       <div className="w-full max-w-xl mx-auto  bg-white p-8 rounded-xl shadow-md">
         <h1 className="text-2xl font-bold text-center mb-6">Crear Pago</h1>
-        <CreatePayment currencies={currencies} onSubmit={handleSubmit} />
+        <CreatePayment currencies={currencies} />
       </div>
     </div>
   );
