@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import { Currency, PaymentOrder } from '../types';
 import CurrencySelector from './CurrencySelector';
-import Modal from './Modal';
 import { RiInformationLine } from '@remixicon/react';
+import useCreatePayment from '@/hooks/useCreatePayment';
 
 interface PaymentFormProps {
   currencies: Currency[];
@@ -10,43 +10,45 @@ interface PaymentFormProps {
 }
 
 const CreatePayment = ({ onSubmit, currencies }: PaymentFormProps) => {
+  const { createPayment, loading, /* error,  */data } = useCreatePayment();
   const [selectedCrypto, setSelectedCrypto] = useState<Currency>(currencies[0]);
+  const [amount, setAmount] = useState<string>("")
   const [formData, setFormData] = useState<{ amount: number; concept: string; }>({
     amount: 0,
     concept: '',
   });
-
   const [error, setError] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-    if(currencies && currencies.length) {
-      console.log("AQUI LOS CURRENCIESS", currencies)
-      setFormData((prev) => { return {...prev, currency: currencies[0]} })
-    }
-  }, [currencies])
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!formData.amount || !formData.concept ) {
-      setError('Todos los campos son obligatorios');
+  const handleAmountChange = (e) => {
+    let inputValue = e.target.value.replace(/[^0-9.]/g, ""); // Permitir solo números y punto
+    
+    if (inputValue === "") {
+      setAmount("0.00");
       return;
     }
 
+    
+    let formattedValue = parseFloat(inputValue).toFixed(2);
+    console.log("formattedValue", formattedValue);
+    setAmount(inputValue);
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // if (!formData.amount || !formData.concept ) {
+    //   setError('Todos los campos son obligatorios');
+    //   return;
+    // }
+
     try {
-      // Crear el pago usando el endpoint POST /orders
-      // const response = await api.post("/orders", {
-      //   amount,
-      //   concept,
-      //   currency: selectedCrypto,
-      // });
+      // Crear el pago usando el hook useCreatePayment
+      const paymentResult = await createPayment({amount: parseFloat(amount), concept: formData.concept, currency: selectedCrypto.symbol});
 
       // Manejar la respuesta (puedes redirigir a otra pantalla o mostrar un mensaje)
-      // console.log("Pago creado:", response.data);
+      console.log("Pago creado:", paymentResult);
       // setFormError(null); // Limpiar errores
     } catch (err) {
-      console.log(error)
       // setFormError("Error al crear el pago");
     }
   };
@@ -60,18 +62,10 @@ const CreatePayment = ({ onSubmit, currencies }: PaymentFormProps) => {
           </label>
           <div className="mt-1">
             <input
-              type="number"
-              step="0.01"
               id="amount"
-              // value={formData.amount}
-              defaultValue={""}
-              onChange={(e) => {
-                const value = e.target.value.replace(',', '.'); // Reemplaza la coma por un punto
-                const parsedValue = parseFloat(value);
-                if (!isNaN(parsedValue) && /^\d+(\.\d{0,2})?$/.test(value)) { // Verifica que tenga como máximo 2 decimales
-                  setFormData((prev) => { return { ...prev, amount: parsedValue }});
-                }
-              }}
+              type="text"
+              value={amount}
+              onChange={handleAmountChange}
               className="w-full text-primary px-2 py-3.5 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-700"
               placeholder="Añade importe a pagar"
             />
@@ -116,19 +110,13 @@ const CreatePayment = ({ onSubmit, currencies }: PaymentFormProps) => {
         <div>
           <button
             type="submit"
-            disabled
+            // disabled={Boolean(error) && true}
             className="w-full p-4 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none disabled:opacity-30 disabled:pointer-events-none focus:ring-2 focus:ring-blue-500"
           >
             Continuar
           </button>
         </div>
       </form>
-
-      {/* Modal */}
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <h2>Selecciona una criptomoneda</h2>
-        {/* Aquí puedes agregar más contenido para el modal */}
-      </Modal>
     </>
   );
 };

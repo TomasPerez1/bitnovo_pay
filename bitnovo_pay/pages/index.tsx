@@ -3,7 +3,7 @@ import useCurrencies from '@/hooks/useCurrencies';
 
 const Home = () => {
   const { currencies, loading, error } = useCurrencies();
-
+  console.log(currencies)
   const handleSubmit = (order: any) => {
     console.log('Pago creado:', order);
     // Aquí manejaremos la creación del pago
