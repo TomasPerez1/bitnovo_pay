@@ -14,8 +14,9 @@ export interface PaymentOrder {
 }
 
 export interface PaymentInfo {
-  id: string;
+  identifier: string;
   fiat_amount: number;
+  crypto_amount: number;
   currency_id: string;
   created_at: string;
   notes: string;

@@ -23,7 +23,7 @@ const PaymentSummary = ({ paymentInfo, currencies, onStatusChange }: PaymentSumm
       <div className="p-6 text-primary font-semibold">
         <h2 className="text-xl text-primary font-semibold mb-4">Resumen del pedido</h2>
 
-        <div className="p-2 rounded-xl shadow-lg bg-gray-100">
+        <div className="p-2 rounded-xl shadow-lg bg-gray-200">
           <div className='flex justify-between p-3 border-b-1 border-gray-400'>
             <p className="text-lg ">Importe:</p>
             <p className="text-lg font-semibold">{paymentInfo.fiat_amount.toFixed(2)} EUR</p>
@@ -31,7 +31,7 @@ const PaymentSummary = ({ paymentInfo, currencies, onStatusChange }: PaymentSumm
 
           <div className='flex justify-between p-3 border-b-1 border-gray-400 items-center'>
             <p className="text-lg ">Moneda seleccionada:</p>
-            <span className='flex items-center border border-black p-0'>
+            <span className='flex items-center  p-0'>
               <Image 
               className="p-2 rounded-xl" 
               width={50} 
