@@ -7,7 +7,7 @@ const useCreatePayment = () => {
   const [data, setData] = useState<any>(null); // Estado para almacenar la respuesta de la API
 
 
-  const createPayment = async ({amount, concept, currency/* , frontDni, backDni */}: {amount: number, concept: string, currency: string/* , frontDni: File, backDni: File */}) => {
+  const createPayment = async ({amount, concept, currency/* , frontDni, backDni */}: {amount: string, concept: string, currency: string/* , frontDni: File, backDni: File */}) => {
     setLoading(true);
     setError(null);
 
@@ -15,15 +15,12 @@ const useCreatePayment = () => {
       // Llamada al endpoint POST /orders
       console.log("se recibio", {amount, concept, currency})
       const formData = new FormData();
-      formData.append("expected_output_amount", "10.00");
-      // formData.append("input_currency", "BCH_TEST");
+      formData.append("expected_output_amount", `${amount}`);
+      formData.append("input_currency", "BCH_TEST");
       // formData.append("front_dni", frontDni);
       // formData.append("back_dni", backDni);
 
-      const response = await api.post("/orders", {
-        expected_output_amount: 10,
-        input_currency: "BCH_TEST"
-      });
+      const response = await api.post("/orders/", formData);
 
       // Guardar la respuesta de la API
       setData(response.data);

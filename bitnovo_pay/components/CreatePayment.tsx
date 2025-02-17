@@ -43,7 +43,7 @@ const CreatePayment = ({ onSubmit, currencies }: PaymentFormProps) => {
 
     try {
       // Crear el pago usando el hook useCreatePayment
-      const paymentResult = await createPayment({amount: parseFloat(amount), concept: formData.concept, currency: selectedCrypto.symbol});
+      const paymentResult = await createPayment({amount, concept: formData.concept, currency: selectedCrypto.symbol});
 
       // Manejar la respuesta (puedes redirigir a otra pantalla o mostrar un mensaje)
       console.log("Pago creado:", paymentResult);
