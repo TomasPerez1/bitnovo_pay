@@ -4,6 +4,7 @@ import { Button } from '@heroui/react';
 import { RiFileCopyLine, RiInformationFill } from '@remixicon/react';
 import QRCode from './QrCode';
 import useWebSocket from '../hooks/useWebSocket';
+import CountdownTimer from './CountdownTimer';
 
 interface PaymentSummaryProps {
   paymentInfo: PaymentInfo;
@@ -12,11 +13,13 @@ interface PaymentSummaryProps {
 
 
 const PaymentGateway = ({ paymentInfo, onStatusChange }: PaymentSummaryProps) => {
-  const status = useWebSocket(paymentInfo.id);
+  console.log(paymentInfo)
+  const status = useWebSocket(paymentInfo.identifier);
   const [paymentMethod, setPaymentMethod] = useState<"QR" | "META">("QR")
 
   useEffect(() => {
     onStatusChange(status);
+    console.log("status", status)
   }, [status, onStatusChange]);
 
   const CopyToClipboard = (ref: any) => {
@@ -28,7 +31,9 @@ const PaymentGateway = ({ paymentInfo, onStatusChange }: PaymentSummaryProps) =>
     <div className="p-6 rounded-lg">
       <h2 className="text-xl font-bold mb-4">Realiza el pago</h2>
       <section className='bg-white rounded-xl shadow-lg flex flex-col items-center gap-4 py-10'>
-      
+
+        <CountdownTimer targetDate={paymentInfo.expired_time}/>
+
           <div className="flex gap-4">
             <Button className={`w-fit ${paymentMethod === "QR" ? "bg-blue-600 text-white " : "bg-gray-300 text-primary" }`}>
               Smart QR
@@ -39,7 +44,13 @@ const PaymentGateway = ({ paymentInfo, onStatusChange }: PaymentSummaryProps) =>
             </Button>
           </div>
 
-          <QRCode adress={paymentInfo.address}/>
+          <QRCode 
+            adress={paymentInfo.address} 
+            tag_memo={paymentInfo.tag_memo}
+            crypto_amount={paymentInfo.crypto_amount}
+            concept={paymentInfo.notes}
+            currency={paymentInfo.currency_id}
+          />
         
           <div className=' text-primary flex items-center gap-2'>
             <p className="text-md font-medium">Enviar </p>

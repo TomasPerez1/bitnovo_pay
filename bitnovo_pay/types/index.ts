@@ -14,13 +14,14 @@ export interface PaymentOrder {
 }
 
 export interface PaymentInfo {
+  id: string;
+  tag_memo: string;
   identifier: string;
-  fiat_amount: number;
-  crypto_amount: number;
   currency_id: string;
-  created_at: string;
-  notes: string;
-  status: string;
+  crypto_amount: number;
+  fiat_amount: number;
   address: string;
-  qrCode: string;
+  notes: string;
+  expired_time: string;
+  created_at: string;
 }

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 const useWebSocket = (identifier: string) => {
   const [status, setStatus] = useState<string>('pending');
 
+
   useEffect(() => {
     const socket = new WebSocket(`wss://payments.pre-bnvo.com/ws/${identifier}`);
 
