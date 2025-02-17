@@ -1,8 +1,9 @@
 import {  useEffect, useState } from 'react';
 import { Currency, PaymentOrder } from '../types';
-import CurrencySelector from './CurrencySelector';
 import { RiInformationLine } from '@remixicon/react';
+import CurrencySelector from './CurrencySelector';
 import useCreatePayment from '@/hooks/useCreatePayment';
+import { useRouter } from 'next/router';
 
 interface PaymentFormProps {
   currencies: Currency[];
@@ -10,6 +11,7 @@ interface PaymentFormProps {
 }
 
 const CreatePayment = ({ onSubmit, currencies }: PaymentFormProps) => {
+  const router = useRouter();
   const { createPayment, loading, /* error,  */data } = useCreatePayment();
   const [selectedCrypto, setSelectedCrypto] = useState<Currency>(currencies[0]);
   const [amount, setAmount] = useState<string>("")
@@ -42,7 +44,7 @@ const CreatePayment = ({ onSubmit, currencies }: PaymentFormProps) => {
       const paymentResult = await createPayment({amount, concept, currency: selectedCrypto.symbol});
 
       console.log("Pago creado:", paymentResult);
-      // setFormError(null); // Limpiar errores
+      router.push(`/payment?identifier=${paymentResult.identifier}`);
     } catch (err) {
       // setFormError("Error al crear el pago");
     }

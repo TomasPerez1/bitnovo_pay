@@ -49,28 +49,6 @@ const PaymentSummary = ({ paymentInfo, onStatusChange }: PaymentSummaryProps) =>
       </div>
 
       {/* Realiza el pago */}
-      <div className="bg-gray-50 p-6 rounded-lg">
-        <h2 className="text-xl font-bold mb-4">Realiza el pago</h2>
-
-        <div className="space-y-4">
-          {/* Opciones de pago */}
-          <div className="flex space-x-4">
-            <label className="flex items-center space-x-2">
-              <input type="checkbox" className="form-checkbox" />
-              <span>Oscas</span>
-            </label>
-
-            <label className="flex items-center space-x-2">
-              <input type="checkbox" className="form-checkbox" />
-              <span>Smart QR</span>
-            </label>
-
-            <label className="flex items-center space-x-2">
-              <input type="checkbox" className="form-checkbox" />
-              <span>Web3</span>
-            </label>
-          </div>
-
           {/* Cantidad a enviar */}
           <div>
             <p className="text-sm text-gray-600">Enviar:</p>
@@ -89,20 +67,6 @@ const PaymentSummary = ({ paymentInfo, onStatusChange }: PaymentSummaryProps) =>
             <p className="text-lg font-semibold">2557164061</p>
           </div>
         </div>
-      </div>
-
-      {/* Estado del pago */}
-      <div className="text-center">
-        <p className="text-sm text-gray-600">Estado:</p>
-        <p className="text-lg font-semibold">
-          {status === 'pending' && 'Pendiente'}
-          {status === 'AC' && 'Aceptado'}
-          {status === 'CO' && 'Completado'}
-          {status === 'EX' && 'Expirado'}
-          {status === 'OC' && 'Cancelado'}
-        </p>
-      </div>
-    </div>
   );
 };
 

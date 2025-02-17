@@ -6,7 +6,6 @@ const Home = () => {
   console.log(currencies)
   const handleSubmit = (order: any) => {
     console.log('Pago creado:', order);
-    // Aquí manejaremos la creación del pago
   };
 
   if (loading) return <p className="text-center bg-green-600">Cargando criptodivisas...</p>;
@@ -14,7 +13,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen  bg-gray-100 flex items-center justify-center p-4">
-      <div className="w-[40%] mx-auto max-w-xl bg-white p-8 rounded-xl shadow-md">
+      <div className="w-[80%] mx-auto flex bg-white p-8 rounded-xl shadow-md">
         <h1 className="text-2xl font-bold text-center mb-6">Crear Pago</h1>
         <CreatePayment currencies={currencies} onSubmit={handleSubmit} />
       </div>
