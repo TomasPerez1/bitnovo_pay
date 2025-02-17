@@ -2,7 +2,6 @@ import type { Currency } from "@/types";
 import Image from "next/image";
 import { Modal, ModalContent, ModalHeader,ModalBody, useDisclosure} from "@heroui/react"; 
 import {RiArrowDownSLine, RiArrowRightSLine , RiCheckboxCircleFill} from "@remixicon/react"
-import useCurrencies from "@/hooks/useCurrencies";
 
 
 const CurrencySelector = ({currencies, selectedCrypto, setSelectedCrypto }: { currencies: Currency[], selectedCrypto: Currency; setSelectedCrypto: any }) => {

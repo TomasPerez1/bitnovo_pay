@@ -1,8 +1,8 @@
 export interface Currency {
   symbol: string;
   name: string;
-  minAmount: number;
-  maxAmount: number;
+  min_amount: string;
+  max_amount: string;
   blockchain: string;
   image: string;
 }

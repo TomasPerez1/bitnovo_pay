@@ -1,4 +1,4 @@
-import {  useState } from 'react';
+import {  useEffect, useState } from 'react';
 import { Currency, PaymentOrder } from '../types';
 import CurrencySelector from './CurrencySelector';
 import { RiInformationLine } from '@remixicon/react';
@@ -13,21 +13,12 @@ const CreatePayment = ({ onSubmit, currencies }: PaymentFormProps) => {
   const { createPayment, loading, /* error,  */data } = useCreatePayment();
   const [selectedCrypto, setSelectedCrypto] = useState<Currency>(currencies[0]);
   const [amount, setAmount] = useState<string>("")
-  const [formData, setFormData] = useState<{ amount: number; concept: string; }>({
-    amount: 0,
-    concept: '',
-  });
-  const [error, setError] = useState<string | null>(null);
+  const [concept, setConcept] = useState<string>("");
+  const [error, setError] = useState<string>("default");
 
   const handleAmountChange = (e) => {
-    let inputValue = e.target.value.replace(/[^0-9.]/g, ""); // Permitir solo números y punto
-    
-    if (inputValue === "") {
-      setAmount("0.00");
-      return;
-    }
-
-    
+    setError("default")
+    let inputValue = e.target.value.replace(/[^0-9.]/g, "");
     let formattedValue = parseFloat(inputValue).toFixed(2);
     console.log("formattedValue", formattedValue);
     setAmount(inputValue);
@@ -35,28 +26,32 @@ const CreatePayment = ({ onSubmit, currencies }: PaymentFormProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const {min_amount, max_amount} = selectedCrypto;
 
-    // if (!formData.amount || !formData.concept ) {
-    //   setError('Todos los campos son obligatorios');
-    //   return;
-    // }
+    if (parseFloat(amount) < parseFloat(min_amount)) {
+      setError(`El importe mínimo es ${min_amount}`);
+      return;
+    }
+    if (parseFloat(amount) > parseFloat(max_amount)) {
+      setError(`El importe maximo es ${max_amount}`);
+      return;
+    }
+    
 
     try {
-      // Crear el pago usando el hook useCreatePayment
-      const paymentResult = await createPayment({amount, concept: formData.concept, currency: selectedCrypto.symbol});
+      const paymentResult = await createPayment({amount, concept, currency: selectedCrypto.symbol});
 
-      // Manejar la respuesta (puedes redirigir a otra pantalla o mostrar un mensaje)
       console.log("Pago creado:", paymentResult);
       // setFormError(null); // Limpiar errores
     } catch (err) {
       // setFormError("Error al crear el pago");
     }
   };
-
+  
   return (
     <>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
+      <form onSubmit={handleSubmit} className="">
+        <div className='mb-2'>
           <label htmlFor="amount" className="block text-sm font-medium">
             Importe a pagar
           </label>
@@ -69,14 +64,17 @@ const CreatePayment = ({ onSubmit, currencies }: PaymentFormProps) => {
               className="w-full text-primary px-2 py-3.5 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-700"
               placeholder="Añade importe a pagar"
             />
+            <p className={`text-sm ml-2  ${error !== "default" ? "visible text-red-600" : "invisible"}`}>
+              {error}
+            </p>
           </div>
         </div>
     
-        <div>
-          <label htmlFor="currency" className="text-sm font-medium flex gap-1 text-center">
-            Seleccionar moneda <RiInformationLine className='w-5 text-gray-600'/>
+        <div className='mb-6'>
+          <label htmlFor="currency" className="text-sm font-medium flex gap-1 items-center">
+            Seleccionar moneda <RiInformationLine className='w-4 text-gray-600'/>
           </label>
-          <div className="mt-1">
+          <div onClick={() => setError("default")} className="mt-1">
             <CurrencySelector
               currencies={currencies}
               selectedCrypto={selectedCrypto}
@@ -85,7 +83,7 @@ const CreatePayment = ({ onSubmit, currencies }: PaymentFormProps) => {
           </div>
         </div>
 
-        <div>
+        <div className='mb-6'>
           <label htmlFor="concept" className="block text-sm font-medium ">
             Concepto
           </label>
@@ -93,24 +91,18 @@ const CreatePayment = ({ onSubmit, currencies }: PaymentFormProps) => {
             <input
               type="text"
               id="concept"
-              value={formData.concept}
-              onChange={(e) => setFormData((prev) => { return { ...prev, concept: e.target.value }})}
+              value={concept}
+              onChange={(e) => setConcept(e.target.value)}
               className="w-full text-primary px-2 py-3.5 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-700"
               placeholder="Añade descripción del pago"
             />
           </div>
         </div>
 
-        {error && (
-          <p className="text-sm text-red-600">
-            {error}
-          </p>
-        )}
-
         <div>
           <button
             type="submit"
-            // disabled={Boolean(error) && true}
+            disabled={error !== "default" || !amount || !concept && true}
             className="w-full p-4 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none disabled:opacity-30 disabled:pointer-events-none focus:ring-2 focus:ring-blue-500"
           >
             Continuar
