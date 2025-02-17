@@ -2,6 +2,7 @@ import { PaymentInfo } from '../types';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import PaymentSummary from '../components/PaymentSummary';
+import PaymentGateway from '@/components/PaymentGateway';
 import usePaymentInfo from '@/hooks/usePaymentInfo';
 import api from '../services/api';
 
@@ -25,8 +26,9 @@ const PaymentPage = () => {
   console.log("paymentInfo", paymentInfo)
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
+      <div className="w-[80%] gap-2  flex  bg-white p-8 rounded-lg shadow-md">
         <PaymentSummary paymentInfo={paymentInfo} onStatusChange={() => {} } />
+        <PaymentGateway paymentInfo={paymentInfo} onStatusChange={() => {} } />
       </div>
     </div>
   );
