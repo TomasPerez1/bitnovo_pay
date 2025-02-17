@@ -68,7 +68,7 @@ const CreatePayment = ({ onSubmit }: PaymentFormProps) => {
               // value={formData.amount}
               defaultValue={""}
               onChange={(e) => setFormData((prev) => { return { ...prev, amount: parseFloat(e.target.value) }})}
-              className="w-full text-primary px-2 py-3.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full text-primary px-2 py-3.5 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-700"
               placeholder="Añade importe a pagar"
             />
           </div>
@@ -80,7 +80,8 @@ const CreatePayment = ({ onSubmit }: PaymentFormProps) => {
  */}            Seleccionar moneda
           </label>
           <div className="mt-1">
-            <CurrencySelector currencies={currencies} currency={formData.currency} setFormData={setFormData} onOpenModal={() => setIsModalOpen(true)}/>
+            <CurrencySelector/>
+            {/* <CurrencySelector currencies={currencies} currency={formData.currency} setFormData={setFormData} onOpenModal={() => setIsModalOpen(true)}/> */}
             {/* <select
               id="currency"
               value={formData.currency}
@@ -107,7 +108,7 @@ const CreatePayment = ({ onSubmit }: PaymentFormProps) => {
               id="concept"
               value={formData.concept}
               onChange={(e) => setFormData((prev) => { return { ...prev, concept: e.target.value }})}
-              className="w-full text-primary px-2 py-3.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full text-primary px-2 py-3.5 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-700"
               placeholder="Añade descripción del pago"
             />
           </div>
@@ -123,7 +124,7 @@ const CreatePayment = ({ onSubmit }: PaymentFormProps) => {
           <button
             type="submit"
             disabled
-            className="w-full px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none disabled:opacity-30 disabled:pointer-events-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-4 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none disabled:opacity-30 disabled:pointer-events-none focus:ring-2 focus:ring-blue-500"
           >
             Continuar
           </button>
