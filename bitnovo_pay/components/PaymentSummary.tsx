@@ -12,7 +12,7 @@ const PaymentSummary = ({ paymentInfo, currencies }: PaymentSummaryProps) => {
 
 
   return (
-    <div className="space-y-8 w-full border border-green-500">
+    <div className="space-y-8 w-full ">
       <div className="p-6 text-primary font-semibold">
         <h2 className="text-xl text-primary font-semibold mb-4">Resumen del pedido</h2>
 

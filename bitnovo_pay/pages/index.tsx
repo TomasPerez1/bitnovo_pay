@@ -1,11 +1,13 @@
 import CreatePayment from '@/components/CreatePayment';
 import useCurrencies from '@/hooks/useCurrencies';
+import { useRouter } from 'next/router';
 
 const Home = () => {
+  const router = useRouter();
   const { currencies, loading, error } = useCurrencies();
 
-  if (loading) return <p className="text-center bg-green-600">Cargando criptodivisas...</p>;
-  if (error) return <p className="text-center text-red-600">{error}</p>;
+  if (loading) return <div className="bg-white"></div>;
+  if (error) return router.push(`/error`);
 
   return (
     <div className="min-h-screen  bg-gray-100 flex items-center justify-center p-4">

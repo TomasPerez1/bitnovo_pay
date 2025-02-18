@@ -4,21 +4,21 @@ import { Currency } from '../types';
 import { RiInformationLine } from '@remixicon/react';
 import CurrencySelector from './CurrencySelector';
 import useCreatePayment from '@/hooks/useCreatePayment';
+import { Button } from '@heroui/react';
 
 
 const CreatePayment = ({ currencies }: {currencies: Currency[]}) => {
   const router = useRouter();
-  const { createPayment, loading, /* error,  */data } = useCreatePayment();
+  const { createPayment, loading, /* error,  */} = useCreatePayment();
   const [selectedCrypto, setSelectedCrypto] = useState<Currency>(currencies[0]);
   const [amount, setAmount] = useState<string>("")
   const [concept, setConcept] = useState<string>("");
   const [error, setError] = useState<string>("default");
 
-  const handleAmountChange = (e) => {
+  const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setError("default")
     let inputValue = e.target.value.replace(/[^0-9.]/g, "");
-    let formattedValue = parseFloat(inputValue).toFixed(2);
-    console.log("formattedValue", formattedValue);
+    // let formattedValue = parseFloat(inputValue).toFixed(2);
     setAmount(inputValue);
   }
 
@@ -42,7 +42,7 @@ const CreatePayment = ({ currencies }: {currencies: Currency[]}) => {
       console.log("Pago creado:", paymentResult);
       router.push(`/payment?identifier=${paymentResult.identifier}`);
     } catch (err) {
-      // setFormError("Error al crear el pago");
+      console.log(err)
     }
   };
   
@@ -98,13 +98,14 @@ const CreatePayment = ({ currencies }: {currencies: Currency[]}) => {
         </div>
 
         <div>
-          <button
+          <Button
             type="submit"
+            isLoading={loading}
             disabled={error !== "default" || !amount || !concept && true}
-            className="w-full p-4 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none disabled:opacity-30 disabled:pointer-events-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-6 text-base text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none disabled:opacity-30 disabled:pointer-events-none"
           >
             Continuar
-          </button>
+          </Button>
         </div>
       </form>
     </>

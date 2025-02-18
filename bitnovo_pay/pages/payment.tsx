@@ -7,7 +7,7 @@ import usePaymentInfo from '@/hooks/usePaymentInfo';
 import useCurrencies from '@/hooks/useCurrencies';
 import useWebSocket from '@/hooks/useWebSocket';
 
-const PaymentPage = () => {
+const Payment = () => {
   const router = useRouter();
   const { identifier } = router.query;
   const { currencies } = useCurrencies();
@@ -35,7 +35,7 @@ const PaymentPage = () => {
     }
   }, [paymentStatus, paymentInfo?.status, redirected]);
 
-  if (loading) return <p className="text-center">Cargando información del pago...</p>;
+  if (loading) return <div className="bg-white"></div>;
   if (error || wsError) return <p className="text-center text-red-600">{error || wsError}</p>;
   if (!paymentInfo) return <p className="text-center">No se encontró información del pago.</p>;
 
@@ -49,5 +49,5 @@ const PaymentPage = () => {
   );
 };
 
-export default PaymentPage;
+export default Payment;
 
