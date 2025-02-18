@@ -8,9 +8,6 @@ const __dirname = dirname(__filename);
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
-  // plugins: {
-  //   prettier: eslintPluginPrettier,
-  // },
 });
 
 const eslintConfig = [
@@ -18,7 +15,8 @@ const eslintConfig = [
   {
     files: ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"],
     rules: {
-      'allowImportingTsExtensions': "off"
+      'allowImportingTsExtensions': "off",
+      'react-hooks/exhaustive-deps': "off"
     }
   }
 ];
