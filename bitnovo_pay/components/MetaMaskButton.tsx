@@ -35,10 +35,8 @@ const MetaMaskButton = ({paymentInfo}: {paymentInfo: PaymentInfo}) => {
           <img src="/metamask-icon.svg" alt="MetaMask" className="p-4" />
         </Button>
       ) : (
-        <div className="w-[200px] p-2 h-[200px] shadow-2xl rounded flex items-center">
-          <Button onPress={handleMetaMaskPayment} className="max-w-[90%] mx-auto bg-orange-400 text-white text-base  shadow-2xl rounded">
-            <p className='text-white'>Enviar por metamask</p>
-          </Button>
+        <div onClick={handleMetaMaskPayment} className="cursor-pointer transition-colors hover:bg-orange-300 w-[150px] p-2 h-[150px] bg-orange-400 font-bold text-center text-white shadow-xl rounded flex items-center">
+          <p className='text-white'>Enviar por metamask</p>
         </div>
       )}
     </picture>

@@ -18,7 +18,6 @@ const CreatePayment = ({ currencies }: {currencies: Currency[]}) => {
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setError("default")
     let inputValue = e.target.value.replace(/[^0-9.]/g, "");
-    // let formattedValue = parseFloat(inputValue).toFixed(2);
     setAmount(inputValue);
   }
 

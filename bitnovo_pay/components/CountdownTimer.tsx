@@ -29,7 +29,17 @@ const CountdownTimer = ({ targetDate }: { targetDate: string }) => {
 
   return (
     <time className=" text-primary">
-      {timeLeft.seconds === 0 ? <p className='p-1 bg-red-300 text-red-500 w-fit rounded-lg mx-auto'>EXPIRADO</p> : timeStr}
+      {timeLeft.seconds === 0 
+        ? <p className='p-1 bg-red-300 text-red-500 w-fit rounded-lg mx-auto'>EXPIRADO</p> 
+        : <p className='flex gap-1'>
+            <img
+              src="/timer.svg"
+              alt="Copiar"
+              className="w-5 text-primary"
+            />
+            {timeStr}
+          </p>
+      }
     </time>
   );
 };

@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import PaymentSummary from '../components/PaymentSummary';
@@ -40,17 +39,20 @@ const Payment = () => {
   if (!paymentInfo) return <p className="text-center">No se encontró información del pago.</p>;
 
   return (
-    <div className="min-h-screen relative bg-gray-100 flex items-center justify-center px-4 py-10">
-      <div className="w-[85%] border border-black max-h-[20%] gap-2 grid grid-cols-2 p-8 rounded-lg">
+    <div className="min-h-screen relative bg-gray-100 flex flex-col items-center justify-between px-4 py-10">
+      <div className="relative w-[95%] h-fit gap-2 grid grid-cols-2 p-0 rounded-lg">
         <PaymentSummary paymentInfo={paymentInfo} currencies={currencies} />
         <PaymentGateway paymentInfo={paymentInfo} />
       </div>
-      <Image
-        className='absolute ' 
-        src="/water_mark_bitnovo.png" 
-        alt="Descripción de la imagen" 
-        width={400} 
-        height={200} />
+      <picture className="r">
+        <Image
+          className='' 
+          src="/water_mark_bitnovo.png" 
+          alt="Descripción de la imagen" 
+          width={400} 
+          height={26} 
+        />
+      </picture>
     </div>
   );
 };
