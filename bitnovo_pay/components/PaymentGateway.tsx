@@ -4,6 +4,7 @@ import { Button } from '@heroui/react';
 import CountdownTimer from './CountdownTimer';
 import QRCode from './QrCode';
 import MetaMaskButton from './MetaMaskButton';
+import Image from 'next/image';
 
 
 const PaymentGateway = ({ paymentInfo }: { paymentInfo: PaymentInfo }) => {
@@ -57,10 +58,12 @@ const PaymentGateway = ({ paymentInfo }: { paymentInfo: PaymentInfo }) => {
           <p className="text-lg font-semibold">
             {paymentInfo.crypto_amount} {paymentInfo.currency_id.replaceAll('_', ' ')}
           </p>
-          <img
+          <Image
             src="/Copy.svg"
             alt="Copiar"
-            className="w-5 text-blue-600 cursor-pointer"
+            width={20}
+            height={20}
+            className="text-blue-600 cursor-pointer"
             onClick={() => copyToClipboard(paymentInfo.crypto_amount.toString())}
           />
         </div>
@@ -70,22 +73,31 @@ const PaymentGateway = ({ paymentInfo }: { paymentInfo: PaymentInfo }) => {
             {paymentInfo.address}
           </p>
           <div className="cursor-pointer absolute top-1 right-2" onClick={() => copyToClipboard(paymentInfo.address)}>
-            <img
+            <Image
               src="/Copy.svg"
               alt="Copiar"
-              className="w-5 text-blue-600"
+              width={20}
+              height={20}
+              className="text-blue-600"
             />
           </div>
         </div>
 
         <div className="flex items-center gap-1.5">
-          <img src="/warning-2.svg" alt="Advertencia" className="w-5 text-yellow-400/50" />
+          <Image 
+            src="/warning-2.svg" 
+            alt="Advertencia" 
+            width={20}
+            height={20}
+          />
           <p className="text-sm text-gray-600">Etiqueta de destino:</p>
           <p className="text-sm font-semibold">{paymentInfo.tag_memo || "no disponible"}</p>
-          <img
+          <Image
             src="/Copy.svg"
             alt="Copiar"
-            className="w-5 text-blue-600 cursor-pointer"
+            width={20}
+            height={20}
+            className="text-blue-600 cursor-pointer"
             onClick={() => copyToClipboard(paymentInfo.tag_memo)}
           />
         </div>

@@ -4,13 +4,15 @@ import { Modal, ModalContent, ModalHeader,ModalBody, useDisclosure} from "@herou
 import {RiArrowDownSLine, RiArrowRightSLine , RiCheckboxCircleFill} from "@remixicon/react"
 
 
-const CurrencySelector = ({currencies, selectedCrypto, setSelectedCrypto }: { currencies: Currency[], selectedCrypto: Currency; setSelectedCrypto: any }) => {
+const CurrencySelector = ({currencies, selectedCrypto, setSelectedCrypto }: { currencies: Currency[], selectedCrypto: Currency; setSelectedCrypto: (currency : Currency) => void }) => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   const handleSelect = ({cryptoId, closeModal}: {cryptoId: string, closeModal: () => void}) => {
-    const newCurrency = currencies.find(curr => curr.symbol === cryptoId)
-    setSelectedCrypto(newCurrency); 
-    closeModal();
+    const newCurrency = currencies.find(curr => curr.symbol === cryptoId);
+    if (newCurrency) {
+      setSelectedCrypto(newCurrency);
+      closeModal();
+    }
   };
 
   return (

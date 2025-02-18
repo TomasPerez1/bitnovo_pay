@@ -8,8 +8,9 @@ interface QrProps {
   tag_memo: string;
 }
 
-const QRCode = ({currency, adress, crypto_amount, tag_memo}: QrProps) => {
-  const uri =`ripple:${adress}?amount=${crypto_amount}`
+const QRCode = ({currency, adress, crypto_amount}: QrProps) => {
+  const uri =`${currency.replaceAll("_", "").toLowerCase()}:${adress}?amount=${crypto_amount}`
+  console.log(uri)
 
   return (
     <picture className="shadow-2xl rounded-xl  w-fit mx-auto  p-4 ">

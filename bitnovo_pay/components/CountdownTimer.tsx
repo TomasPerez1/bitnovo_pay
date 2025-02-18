@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 const calculateTimeLeft = (date: string) => {
     const target = new Date(date).getTime();
@@ -32,10 +33,12 @@ const CountdownTimer = ({ targetDate }: { targetDate: string }) => {
       {timeLeft.seconds === 0 
         ? <p className='p-1 bg-red-300 text-red-500 w-fit rounded-lg mx-auto'>EXPIRADO</p> 
         : <p className='flex gap-1'>
-            <img
+            <Image
               src="/timer.svg"
-              alt="Copiar"
-              className="w-5 text-primary"
+              alt="Clock"
+              width={20}
+              height={20}
+              className=" text-primary"
             />
             {timeStr}
           </p>
