@@ -8,10 +8,12 @@ const SuccessPage = () => {
   return (
     <div className="min-h-screen relative bg-gray-100 flex items-center justify-center p-4">
       <div className="w-full max-w-md flex flex-col gap-6 py-8 bg-white p-8 rounded-lg shadow-md text-center">
-        <img
+        <Image
           src="/tick-circle.svg"
-          alt="Copiar"
-          className="w-20 mx-auto"
+          alt="Success"
+          width={80}
+          height={80}
+          className="mx-auto"
         />
         <h1 className="text-2xl font-bold text-primary mb-4">¡Pago Completado!</h1>
         <p className="text-gray-700 text-center">Tu pago se ha realizado con éxito</p>

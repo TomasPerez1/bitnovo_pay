@@ -32,7 +32,7 @@ const Payment = () => {
       router.push("/error");
       setRedirected(true);
     }
-  }, [paymentStatus, paymentInfo?.status, redirected]);
+  }, [paymentStatus, paymentInfo?.status, redirected, router]);
 
   if (loading) return <div className="bg-white"></div>;
   if (error || wsError) return <p className="text-center text-red-600">{error || wsError}</p>;
