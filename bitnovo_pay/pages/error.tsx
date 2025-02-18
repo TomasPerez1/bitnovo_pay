@@ -7,10 +7,12 @@ const ErrorPage = () => {
   return (
     <div className="min-h-screen relative bg-gray-100 flex items-center justify-center p-4">
       <div className="w-full max-w-md flex flex-col gap-6 py-8 bg-white p-8 rounded-lg shadow-md text-center">
-        <img
+        <Image
           src="/close-circle.svg"
-          alt="Copiar"
-          className="w-20 mx-auto"
+          alt="Error"
+          width={80}
+          height={80}
+          className="mx-auto"
         />
         <h1 className="text-2xl font-bold text-primary mb-4">¡Pago Cancelado!</h1>
         <p className="text-gray-700 text-center">Lorem ipsum dolor sit amet consectetur. Laoreet blandit auctor et varius dolor elit facilisi enim. Nulla ut ut eu nunc.</p>
