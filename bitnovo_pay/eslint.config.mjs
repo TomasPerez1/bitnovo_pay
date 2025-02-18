@@ -10,10 +10,9 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript", "plugin:prettier/recommended"),
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
-    plugins: ["prettier"],
+    files: ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"],
     rules: {
       "prettier/prettier": "error",
       "allowImportingTsExtensions": "warn"
