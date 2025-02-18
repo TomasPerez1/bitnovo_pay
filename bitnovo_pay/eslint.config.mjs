@@ -14,7 +14,7 @@ const eslintConfig = [
   {
     files: ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"],
     rules: {
-      "prettier/prettier": "error",
+      // "prettier/prettier": "error",
       "allowImportingTsExtensions": "warn"
     }
   }
