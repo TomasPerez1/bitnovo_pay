@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import api from "@/services/api";
+import type { PaymentInfo } from "@/types";
 
 const usePaymentInfo = (identifier: string) => {
-  const [paymentInfo, setPaymentInfo] = useState<any>(null);
+  const [paymentInfo, setPaymentInfo] = useState<PaymentInfo | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 

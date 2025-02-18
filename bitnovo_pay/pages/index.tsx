@@ -3,8 +3,6 @@ import useCurrencies from '@/hooks/useCurrencies';
 
 const Home = () => {
   const { currencies, loading, error } = useCurrencies();
-  const handleSubmit = (order: any) => {
-  };
 
   if (loading) return <p className="text-center bg-green-600">Cargando criptodivisas...</p>;
   if (error) return <p className="text-center text-red-600">{error}</p>;

@@ -15,6 +15,7 @@ export interface PaymentOrder {
 
 export interface PaymentInfo {
   id: string;
+  status: string;
   tag_memo: string;
   identifier: string;
   currency_id: string;
