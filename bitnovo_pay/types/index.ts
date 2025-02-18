@@ -27,8 +27,8 @@ export interface PaymentInfo {
   created_at: string;
 }
 
-declare global {
-  interface Window {
-    ethereum: import('@metamask/providers').MetaMaskInpageProvider;
-  }
-}
+// declare global {
+//   interface Window {
+//     ethereum: import('@metamask/providers').MetaMaskInpageProvider;
+//   }
+// }

@@ -69,7 +69,7 @@ const PaymentGateway = ({ paymentInfo }: { paymentInfo: PaymentInfo }) => {
           <p ref={addressRef} className="w-[80%]   mx-auto break-words text-base text-primary text-center">
             {paymentInfo.address}
           </p>
-          <div className="cursor-pointer absolute top-1 right-3" onClick={() => copyToClipboard(paymentInfo.address)}>
+          <div className="cursor-pointer absolute top-1 right-2" onClick={() => copyToClipboard(paymentInfo.address)}>
             <img
               src="/Copy.svg"
               alt="Copiar"
@@ -82,6 +82,12 @@ const PaymentGateway = ({ paymentInfo }: { paymentInfo: PaymentInfo }) => {
           <img src="/warning-2.svg" alt="Advertencia" className="w-5 text-yellow-400/50" />
           <p className="text-sm text-gray-600">Etiqueta de destino:</p>
           <p className="text-sm font-semibold">{paymentInfo.tag_memo || "no disponible"}</p>
+          <img
+            src="/Copy.svg"
+            alt="Copiar"
+            className="w-5 text-blue-600 cursor-pointer"
+            onClick={() => copyToClipboard(paymentInfo.tag_memo)}
+          />
         </div>
       </section>
     </div>
