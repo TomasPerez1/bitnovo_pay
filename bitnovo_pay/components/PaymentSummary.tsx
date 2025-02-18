@@ -30,7 +30,7 @@ const PaymentSummary = ({ paymentInfo, currencies }: PaymentSummaryProps) => {
               width={50} 
               height={50} 
               alt={selectedCrypto?.name || "crypto_img"} 
-              src={selectedCrypto?.image || "crypto_img"}/>
+              src={selectedCrypto?.image || "/"}/>
               <p className="text-lg font-semibold">{paymentInfo.currency_id.replaceAll("_", " ")}</p>
             </span>
           </div>

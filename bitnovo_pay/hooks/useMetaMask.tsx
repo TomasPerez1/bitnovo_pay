@@ -26,7 +26,7 @@ const useMetaMask = () => {
       });
 
       await (ethereum as any).request({ method: 'eth_requestAccounts' });
-
+      
       const newProvider = new ethers.BrowserProvider(ethereum as any);
       const newSigner = await newProvider.getSigner();
       const newAccount = await newSigner.getAddress();
@@ -51,22 +51,13 @@ const useMetaMask = () => {
 
     try {
       const value = ethers.parseEther(amountInEth);
-      const balance = await provider.getBalance(account!);
-      console.log("balance", balance)
-    
-      const network = await provider.getNetwork();
-      console.log("NETWORK", network)
-      
 
       const tx = await signer.sendTransaction({
         to,
         value,
       });
-
-      console.log('Transacción enviada:', tx.hash);
-
-      const receipt = await tx.wait();
-      console.log("RESULT", receipt)
+      const receipt = await tx.wait()
+  
       if (receipt?.status === 1) {
         router.push('/success'); 
       } else {
@@ -75,9 +66,7 @@ const useMetaMask = () => {
 
       return tx;
     } catch (err: any) {
-      console.error('Error al enviar transacción:', err);
-      setError(err.message);
-      router.push('/error'); 
+      return router.push('/error'); 
     }
   };
 
@@ -94,7 +83,7 @@ const useMetaMask = () => {
         setAccount(null);
         setProvider(null);
         setSigner(null);
-        setError('MetaMask desconectado.');
+        setError('MetaMask desconectado');
       };
 
       (ethereum as any).on('accountsChanged', handleAccountsChanged);
