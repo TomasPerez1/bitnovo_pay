@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "@heroui/react": "^2.6.14",
+    "@metamask/detect-provider": "^2.0.0",
     "@remixicon/react": "^4.6.0",
     "axios": "^1.7.9",
+    "ethers": "^6.13.5",
     "framer-motion": "^12.4.3",
     "next": "15.1.7",
     "qrcode.react": "^4.2.0",

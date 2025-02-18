@@ -1,5 +1,5 @@
-import { Currency, PaymentInfo } from '../types';
 import Image from 'next/image';
+import { Currency, PaymentInfo } from '../types';
 import { RiVerifiedBadgeFill } from '@remixicon/react';
 
 interface PaymentSummaryProps {
@@ -12,18 +12,18 @@ const PaymentSummary = ({ paymentInfo, currencies }: PaymentSummaryProps) => {
 
 
   return (
-    <div className="space-y-8 w-full ">
+    <div className=" w-full ">
       <div className="p-6 text-primary font-semibold">
-        <h2 className="text-xl text-primary font-semibold mb-4">Resumen del pedido</h2>
+        <h2 className="text-lg text-primary font-semibold mb-4">Resumen del pedido</h2>
 
         <div className="p-2 rounded-xl shadow-lg bg-gray-200">
           <div className='flex justify-between p-3 border-b-1 border-gray-400'>
-            <p className="text-lg ">Importe:</p>
-            <p className="text-lg font-semibold">{paymentInfo.fiat_amount.toFixed(2)} EUR</p>
+            <p className="text-base">Importe:</p>
+            <p className="text-base font-semibold">{paymentInfo.fiat_amount.toFixed(2)} EUR</p>
           </div>
 
           <div className='flex justify-between p-3 border-b-1 border-gray-400 items-center'>
-            <p className="text-lg ">Moneda seleccionada:</p>
+            <p className="text-base ">Moneda seleccionada:</p>
             <span className='flex items-center  p-0'>
               <Image 
               className="p-2 rounded-xl" 
@@ -36,16 +36,16 @@ const PaymentSummary = ({ paymentInfo, currencies }: PaymentSummaryProps) => {
           </div>
 
           <div className='flex justify-between p-3'>
-            <p className="text-lg ">Comercio:</p>
+            <p className="text-base ">Comercio:</p>
             <span className='flex  items-center gap-1.5'>
               <RiVerifiedBadgeFill className='w-5 text-blue-300'/> 
-              <p className="text-lg font-medium">Comercio de pruebas de Semega</p>
+              <p className="text-base font-medium">Comercio de pruebas de Semega</p>
             </span>
           </div>
 
           <div className='flex justify-between p-3 border-b-1 border-gray-400'>
-            <p className="text-lg ">Fecha:</p>
-            <p className="text-lg font-medium">
+            <p className="text-base ">Fecha:</p>
+            <p className="text-base font-medium">
               {new Date(paymentInfo.created_at).toLocaleString('es-AR', { 
                 timeZone: 'America/Argentina/Buenos_Aires', 
                 hour: 'numeric', 
@@ -58,8 +58,8 @@ const PaymentSummary = ({ paymentInfo, currencies }: PaymentSummaryProps) => {
           </div>
 
           <div className='flex justify-between p-3 '>
-            <p className="text-lg ">Concepto:</p>
-            <p className="text-lg font-medium">{paymentInfo.notes}</p>
+            <p className="text-base ">Concepto:</p>
+            <p className="text-base font-medium">{paymentInfo.notes}</p>
           </div>
         </div>
       </div>

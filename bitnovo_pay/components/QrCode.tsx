@@ -10,11 +10,10 @@ interface QrProps {
 
 const QRCode = ({currency, adress, crypto_amount, tag_memo}: QrProps) => {
   const uri =`ripple:${adress}?amount=${crypto_amount}`
-  // console.log("URI", uri)
 
   return (
-    <picture className="flex flex-col shadow-2xl rounded-xl  w-fit mx-auto items-center gap-4 p-4 ">
-      <QRCodeSVG value={adress} size={200} level="H" />
+    <picture className="shadow-2xl rounded-xl  w-fit mx-auto  p-4 ">
+      <QRCodeSVG className='p-2' value={adress} size={150} level="H" />
     </picture>
   );
 }

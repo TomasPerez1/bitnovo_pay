@@ -26,3 +26,9 @@ export interface PaymentInfo {
   expired_time: string;
   created_at: string;
 }
+
+declare global {
+  interface Window {
+    ethereum: import('@metamask/providers').MetaMaskInpageProvider;
+  }
+}

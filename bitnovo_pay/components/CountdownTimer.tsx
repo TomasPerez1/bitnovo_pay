@@ -5,7 +5,7 @@ const calculateTimeLeft = (date: string) => {
     const now = new Date().getTime();
     const difference = target - now;
 
-    if (difference <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    if (difference <= 0) return {  minutes: 0, seconds: 0 };
 
 
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
@@ -25,9 +25,11 @@ const CountdownTimer = ({ targetDate }: { targetDate: string }) => {
     return () => clearInterval(timer);
   }, [targetDate]);
 
+  const timeStr = `${timeLeft.minutes}:${timeLeft.seconds < 10 ? `0${timeLeft.seconds}` : timeLeft.seconds}`
+
   return (
     <time className=" text-primary">
-      {timeLeft.minutes}:{timeLeft.seconds < 10 ? `0${timeLeft.seconds}` : timeLeft.seconds}
+      {timeLeft.seconds === 0 ? <p className='p-1 bg-red-300 text-red-500 w-fit rounded-lg mx-auto'>EXPIRADO</p> : timeStr}
     </time>
   );
 };
